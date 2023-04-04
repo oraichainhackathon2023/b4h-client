@@ -1,22 +1,14 @@
 <script>
-	import { invoke } from '@tauri-apps/api/tauri';
-
 	let name = '';
-	let greetMsg = '';
-
-	async function greet() {
-		greetMsg = await invoke('greet', { name });
-	}
+	$: greetMsg = `Hello ${name}`;
 </script>
 
 <div>
-	<input
-		type="text"
-		class="input input-bordered input-primary w-full max-w-xs"
-		id="greet-input"
-		placeholder="Enter a name..."
-		bind:value={name}
-	/>
-	<button class="btn btn-primary" on:click={greet}>Greet</button>
+	<label class="label">
+		<span>Input</span>
+		<input class="input" type="text" placeholder="Enter a name.." bind:value={name} />
+	</label>
+
+	<button class="btn variant-filled-primary">Greet</button>
 	<p>{greetMsg}</p>
 </div>
